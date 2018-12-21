@@ -365,6 +365,9 @@
             },
             {
               "name": "Slider"
+            },
+            {
+              "name": "ShowAppMenu"
             }
           ]
         },
