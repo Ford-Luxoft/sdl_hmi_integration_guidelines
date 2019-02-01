@@ -502,7 +502,7 @@
 |frequencyFraction|Integer|false|minvalue:0 maxvalue:9|The fractional part of the frequency for 101.7 is 7|
 |band|Common.RadioBand|false|||
 |rdsData|Common.RdsData|false|||
-|availableHDs|Integer|false|minvalue:0 maxvalue:7|number of HD sub-channels if available <br> deprecated="true" since="5.1"|
+|availableHDs|Integer|false|minvalue:0 maxvalue:7|number of HD sub-channels if available <br> This parameter will become deprecated since API version 5.1|
 |hdChannel|Integer|false|minvalue:0 maxvalue:7|Current HD sub-channel if available. since="5.1|
 |signalStrength|Integer|false|minvalue:0 maxvalue:100||
 |signalChangeThreshold|Integer|false|minvalue:0 maxvalue:100|If the signal strength falls below the set value for this parameter, the radio will tune to an alternative frequency|
@@ -693,7 +693,7 @@
 |radioFrequencyAvailable|Boolean|false||Availability of the control of radio frequency. <br> True: Available, False: Not Available, Not present: Not Available.|
 |hdChannelAvailable|Boolean|false||Availability of the control of HD radio channel. <br> True: Available, False: Not Available, Not present: Not Available|
 |rdsDataAvailable|Boolean|false||Availability of the getting Radio Data System (RDS) data. <br> True: Available, False: Not Available, Not present: Not Available.|
-|availableHDsAvailable|Boolean|false||Availability of the getting the number of available HD channels. <br> True: Available, False: Not Available, Not present: Not Available.|
+|availableHDsAvailable|Boolean|false||Availability of the getting the number of available HD channels. <br> True: Available, False: Not Available, Not present: Not Available. This parameter will become deprecated since API version 5.1|
 |stateAvailable|Boolean|false|| Availability of the getting the Radio state. <br> True: Available, False: Not Available, Not present: Not Available.|
 |signalStrengthAvailable|Boolean|false||Availability of the getting the signal strength. <br> True: Available, False: Not Available, Not present: Not Available.|
 |signalChangeThresholdAvailable|Boolean|false||Availability of the getting the signal Change Threshold. <br> True: Available, False: Not Available, Not present: Not Available.|
