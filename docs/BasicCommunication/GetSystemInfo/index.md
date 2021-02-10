@@ -1,8 +1,13 @@
 ## GetSystemInfo
 
-  * Type: Function
-  * Sender: SDL
-  * Purpose: Get head unit system information
+Type
+: Function
+
+Sender
+: SDL
+
+Purpose
+: Get head unit system information
 
 !!! must
 
@@ -20,8 +25,7 @@ When SDL starts, it sends GetSystemInfo to update the policies database with the
 
 #### Parameters
 
-|Name|Type|Mandatory|Additional|
-|:---|:---|:--------|:---------|
+This RPC has no additional parameter requirements
 
 ### Response
 
@@ -33,7 +37,21 @@ When SDL starts, it sends GetSystemInfo to update the policies database with the
 |language|[Common.Language](../../common/enums/#language)|true||
 |wersCountryCode|String|true|maxlength: 500|
 
-### Example Request
+### Sequence Diagrams
+
+|||
+GetSystemInfo ccpu_version changed  
+![ccpu_versionChanged](./assets/ccpu_versionChanged.png)
+|||
+
+|||
+GetSystemInfo ccpu_version is the same  
+![ccpu_versionSame](./assets/ccpu_versionSame.png)
+|||
+
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
@@ -43,7 +61,7 @@ When SDL starts, it sends GetSystemInfo to update the policies database with the
 }
 ```
 
-### Example Response
+#### Example Response
 
 ```json
 {
@@ -52,16 +70,14 @@ When SDL starts, it sends GetSystemInfo to update the policies database with the
   "result" : {
     "code" : 0,
     "method" : "BasicCommunication.GetSystemInfo",
-    "params" : {
-        "ccpu_version" : "12.1.3",
-        "language" : "EN-US",
-        "wersCountryCode" : "WAEGB"
-        }
-    }
+    "ccpu_version" : "12.1.3",
+    "language" : "EN-US",
+    "wersCountryCode" : "WAEGB"
+  }
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {
@@ -78,9 +94,3 @@ When SDL starts, it sends GetSystemInfo to update the policies database with the
   }
 }
 ```
-
-### Sequence Diagrams
-|||
-GetSystemInfo
-![GetSysteminfo](./assets/GetSystemInfo.png)
-|||

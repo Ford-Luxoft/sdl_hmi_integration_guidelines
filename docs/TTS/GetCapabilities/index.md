@@ -7,14 +7,13 @@ Sender
 : SDL
 
 Purpose
-: Inform SDL of the TTS capabilities of the vehicle.
+: Inform SDL of the <abbr title="Text To Speech">TTS</abbr> capabilities of the vehicle.
 
 ### Request
 
 #### Parameters
 
-|Name|Type|Mandatory|Additional|
-|:---|:---|:--------|:---------|
+This RPC has no additional parameter requirements
 
 ### Response
 
@@ -22,13 +21,15 @@ Purpose
 
 |Name|Type|Mandatory|Additional|
 |:---|:---|:--------|:---------|
-|speechCapabilities|[Common.SpeechCapabilities](../../common/enums/#speechcapabilities)|true|array: true<br>minsize: 1<br>maxsize: 5|
-|prerecordedSpeechCapabilities|[Common.PrerecordedSpeech](../../common/enums/#prerecordedspeech)|true|array: true<br>minsize: 1<br>maxsize: 5|
+|speechCapabilities|[Common.SpeechCapabilities](../../common/enums/#speechcapabilities)|true|array: true<br>minsize: 1<br>maxsize: 100|
+|prerecordedSpeechCapabilities|[Common.PrerecordedSpeech](../../common/enums/#prerecordedspeech)|true|array: true<br>minsize: 1<br>maxsize: 100|
+
+##### SpeechCapabilities
 
 !!! NOTE
 
   Description of possible SpeechCapabilities
-  TTS is performed by the HMI through:
+  <abbr title="Text To Speech">TTS</abbr> is performed by the HMI through:
   
   1. TEXT - Plain text format. TTSChunks with this type provide plain text to be spoken in the `text` field
   2. SAPI_PHONEMES - Microsoft Speech API Format. TTSChunks with this type provide a group of phonemes with this format in the `text` field
@@ -53,12 +54,15 @@ Purpose
 !!!
 
 ### Sequence Diagrams
+
 |||
-GetCapabilities
+GetCapabilities  
 ![GetCapabilities](./assets/GetCapabilities.png)
 |||
 
-### Example Request
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
@@ -67,7 +71,8 @@ GetCapabilities
   "method" : "TTS.GetCapabilities"
 }
 ```
-### Example Response
+
+#### Example Response
 
 ```json
 {
@@ -75,15 +80,15 @@ GetCapabilities
   "jsonrpc" : "2.0",
   "result" :
   {
-    "capabilities" : [TEXT],
-    "prerecordedSpeechCapabilities" : [HELP_JINGLE, INITIAL_JINGLE, LISTEN_JINGLE, POSITIVE_JINGLE, NEGATIVE_JINGLE],
+    "speechCapabilities" : ["TEXT"],
+    "prerecordedSpeechCapabilities" : ["HELP_JINGLE", "INITIAL_JINGLE", "LISTEN_JINGLE", "POSITIVE_JINGLE", "NEGATIVE_JINGLE"],
     "code" : 0,
     "method" : "TTS.GetCapabilities"
   }
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {

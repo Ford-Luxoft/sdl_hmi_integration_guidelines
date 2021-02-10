@@ -7,14 +7,13 @@ Sender
 : SDL
 
 Purpose
-: Get the current TTS language.
+: Get the current <abbr title="Text To Speech">TTS</abbr> language.
 
 ### Request
 
 #### Parameters
 
-|Name|Type|Mandatory|Additional|
-|:---|:---|:--------|:---------|
+This RPC has no additional parameter requirements
 
 ### Response
 
@@ -25,21 +24,25 @@ Purpose
 |language|[Common.Language](../../common/enums/#language)|true||
 
 ### Sequence Diagrams
+
 |||
-GetLanguage
+GetLanguage  
 ![GetLanguage](./assets/GetLanguage.png)
 |||
 
-### Example Request
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
   "id" : 110,
   "jsonrpc" : "2.0",
-  "method" : "TTS.GetLanguage",
+  "method" : "TTS.GetLanguage"
 }
 ```
-### Example Response
+
+#### Example Response
 
 ```json
 {
@@ -54,7 +57,7 @@ GetLanguage
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {

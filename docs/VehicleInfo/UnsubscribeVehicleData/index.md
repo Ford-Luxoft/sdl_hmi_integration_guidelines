@@ -43,8 +43,29 @@ Purpose
 |fuelRange|Boolean|false||
 |engineOilLife|Boolean|false||
 |electronicParkBrakeStatus|Boolean|false||
+|cloudAppVehicleID|Boolean|false||
+|gearStatus|Boolean|false||
+|stabilityControlsStatus|Boolean|false||
+|windowStatus|Boolean|false||
+|handsOffSteering|Boolean|false||
+|seatOccupancy|Boolean|false||
 
 ### Response
+
+!!! must
+
+HMI must send SubscribeVehicleData response only for ROOT level items.
+
+!!!
+
+!!! note 
+
+For OEM specific custom vehicle data items, `oemCustomDataType` will contain a type of OEM specific vehicle data (from schema), and `dataType` will be `VEHICLEDATA_OEM_CUSTOM_DATA`.  
+For vehicle data items from RPCSpec, `oemCustomDataType` will be omitted, and `dataType` will contain appropriate data type from `VehicleDataType` enum.
+
+In the case during data resumption with multiple applications, a subscription is already used by other applications, which have all their data successfully resumed, SDL should not send unsubscribe requests to HMI.
+
+!!!
 
 #### Parameters
 
@@ -78,18 +99,33 @@ Purpose
 |fuelRange|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
 |engineOilLife|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
 |electronicParkBrakeStatus|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|cloudAppVehicleID|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|gearStatus|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|stabilityControlsStatus|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|windowStatus|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|handsOffSteering|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
+|seatOccupancy|[Common.VehicleDataResult](../../common/structs/#vehicledataresult)|false||
 
 ### Sequence Diagrams
+
 |||
 UnsubscribeVehicleData
 ![UnsubscribeVehicleData](./assets/UnsubscribeVehicleData.jpg)
 |||
+
 |||
 UnsubscribeVehicleData unexpected disconnect
 ![UnsubscribeVehicleData](./assets/UnsubscribeVehicleDataDisconnect.jpg)
 |||
 
-### Example Request
+|||
+UnsubscribeVehicleData during data resumption and erroneous response from HMI
+![UnsubscribeVehicleData](./assets/MultipleAppErrorHandling.png)
+|||
+
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
@@ -114,10 +150,11 @@ UnsubscribeVehicleData unexpected disconnect
   }
 }
 ```
-### Example Response
+
+#### Example Response
 
 ```json
-
+{
   "id" : 139,
   "jsonrpc" : "2.0",
   "result" :
@@ -206,7 +243,7 @@ UnsubscribeVehicleData unexpected disconnect
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {

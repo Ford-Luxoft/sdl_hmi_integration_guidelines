@@ -7,14 +7,13 @@ Sender
 : SDL
 
 Purpose
-: Inform SDL of the VR capabilities of the vehicle.
+: Inform SDL of the <abbr title="Voice Recognition">VR</abbr> capabilities of the vehicle.
 
 ### Request
 
 #### Parameters
 
-|Name|Type|Mandatory|Additional|
-|:---|:---|:--------|:---------|
+This RPC has no additional parameter requirements
 
 ### Response
 
@@ -25,12 +24,15 @@ Purpose
 |vrCapabilities|[Common.VrCapabilities](../../common/enums/#vrcapabilities)|false|array: true<br>minsize: 1<br>maxsize: 100|
 
 ### Sequence Diagrams
+
 |||
-GetCapabilities
+GetCapabilities  
 ![GetCapabilities](./assets/GetCapabilities.png)
 |||
 
-### Example Request
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
@@ -39,7 +41,8 @@ GetCapabilities
   "method" : "VR.GetCapabilities"
 }
 ```
-### Example Response
+
+#### Example Response
 
 ```json
 {
@@ -47,14 +50,14 @@ GetCapabilities
   "jsonrpc" : "2.0",
   "result" :
   {
-    "vrCapabilities" : [TEXT],
+    "vrCapabilities" : ["TEXT"],
     "code" : 0,
     "method" : "VR.GetCapabilities"
   }
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {

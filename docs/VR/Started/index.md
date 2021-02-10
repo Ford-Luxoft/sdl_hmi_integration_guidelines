@@ -7,20 +7,28 @@ Sender
 : HMI
 
 Purpose
-: Inform SDL about the start of a VR session
+: Inform SDL about the start of a <abbr title="Voice Recognition">VR</abbr> session
 
 ### Notification
 
+#### Parameters
+
+This RPC has no additional parameter requirements
+
 ### Sequence Diagrams
+
 |||
 Started on PTT Button Press
 ![Started](./assets/Started.png)
 |||
 
-### Example Notification
+### JSON Message Examples
+
+#### Example Notification
 
 ```json
 {
   "jsonrpc" : "2.0",
-  "method" : "VR.Started",
+  "method" : "VR.Started"
 }
+```

@@ -10,13 +10,26 @@ Purpose
 : Add a command for voice recognition
 
 ### Request
-If the application sends `AddCommand` with the `vrCommands` parameter then SDL must maintain a list of the added `vrCommands`.  
+
+If the application sends `AddCommand` with the `vrCommands` parameter then SDL Core will maintain a list of the added `vrCommands`.  
 For each AddCommand, only the first item in the `vrCommands` array shall be added to the list.
 
-Whenever the internal list of added `vrCommands` is updated SDL must:  
-* construct the `vrHelp` and `helpPrompt`  parameters using the data from the list SDL created internally  
-* send these parameters to the HMI via the `SetGlobalProperties` RPC
+Whenever the internal list of added `vrCommands` is updated SDL Core must:  
+* Construct the `vrHelp` and `helpPrompt`  parameters using the data from the list SDL created internally.  
+* Send these parameters to the HMI via the `SetGlobalProperties` RPC.
 
+If the application sends a `CreateInteractionChoiceSet` RPC request that contains `vrCommand` parameters, SDL Core will send the HMI a `VR.AddCommand` request for each `Choice`.
+
+!!! note
+The parameter `type` included in the `VR.AddCommand` request is the differentiator the HMI should use to know if the VR Command originated from an `AddCommand` RPC or a `CreateInteractionChoiceSet` RPC.
+
+`Choice` type <abbr title="Voice Recognition">VR</abbr> Commands should only be used during a `PerformInteraction` RPC Request.
+
+`Command` type <abbr title="Voice Recognition">VR</abbr> Commands should only be used when the user wants to interact with the App's Menu.
+
+During data resumption SDL sends VR.AddCommands to HMI by `internal_consecutiveNumber` in the same order as they were created by mobile app in previous ignition cycle.
+
+!!!
 
 #### Parameters
 
@@ -35,34 +48,46 @@ Whenever the internal list of added `vrCommands` is updated SDL must:
 This RPC has no additional parameter requirements
 
 ### Sequence Diagrams
+
 |||
 AddCommand
 ![AddCommand](./assets/AddCommand.png)
 |||
+
 |||
 UI.AddCommand returns SUCCESS, VR.AddCommand fails
 ![AddCommand](./assets/AddCommandVRFail.png)
 |||
+
 |||
 UI.AddCommand returns SUCCESS, VR.AddCommand no response
 ![AddCommand](./assets/AddCommandNoResponse.png)
 |||
+
 |||
 UI.AddCommand fails, VR.AddCommand returns SUCCESS
 ![AddCommand](./assets/AddCommandSuccessUIFail.png)
 |||
+
 |||
 UI.AddCommand no response, VR.AddCommand returns SUCCESS
 ![AddCommand](./assets/AddCommandSuccessUINoResponse.png)
 |||
 
-### Example Request
+|||
+AddCommand restoring during data resumption
+![AddCommand](./assets/AddCommandResumption.png)
+|||
+
+### JSON Message Examples
+
+#### Example Request
 
 ```json
 {
   "id" : 119,
   "jsonrpc" : "2.0",
-  "method" : "VR. AddCommand",
+  "method" : "VR.AddCommand",
   "params" :
   {
     "cmdID" : 4365,
@@ -72,12 +97,14 @@ UI.AddCommand no response, VR.AddCommand returns SUCCESS
          "Exit",
          "Quit"
     ],
-     "grammarID":123,
-  "appID" : 64467
+    "grammarID" : 123,
+    "type" : "Command",
+    "appID" : 64467
   }
 }
 ```
-### Example Response
+
+#### Example Response
 
 ```json
 {
@@ -91,7 +118,7 @@ UI.AddCommand no response, VR.AddCommand returns SUCCESS
 }
 ```
 
-### Example Error
+#### Example Error
 
 ```json
 {
